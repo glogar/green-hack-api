@@ -1,0 +1,27 @@
+version: "3.8"
+
+networks:
+  default:
+    external:
+      name: web
+
+services:
+  app:
+    container_name: "${PROJECT_NAME}_app"
+    build:
+      context: .
+      dockerfile: ./.devcontainer/Dockerfile
+      args:
+        PYTHON_VERSION_TAG: "${PYTHON_VERSION_TAG}"
+    volumes:
+      - .:/workspace
+    expose:
+      - "8000"
+    labels:
+      - "traefik.enable=true"
+      # HTTP
+      - "traefik.http.routers.${PROJECT_NAME}_app.entrypoints=websecure"
+      - "traefik.http.routers.${PROJECT_NAME}_app.rule=Host(`${PROJECT_BASE_URL}`)"
+      - "traefik.http.routers.${PROJECT_NAME}_app.tls=true"
+      - "traefik.http.routers.${PROJECT_NAME}_app.tls.certresolver=myresolver"
+      - "traefik.http.services.${PROJECT_NAME}_app.loadbalancer.server.port=8000"
