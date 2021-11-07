@@ -2,12 +2,15 @@ from pydantic import BaseModel
 
 from typing import Sequence
 
+from datetime import datetime
+
 
 class MovementBase(BaseModel):
     start_lon: float
     start_lat: float
     end_lon: float
     end_lat: float
+    date: str
 
 
 class MovementCreate(MovementBase):

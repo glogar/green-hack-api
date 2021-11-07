@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, DateTime
 from sqlalchemy.orm import relationship
 
 from src.db.base_class import Base
@@ -10,3 +10,4 @@ class Movement(Base):
     start_lat = Column(Float, nullable=False)
     end_lon = Column(Float, nullable=False)
     end_lat = Column(Float, nullable=False)
+    date = Column(String, nullable=False)

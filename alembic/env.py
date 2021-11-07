@@ -19,7 +19,7 @@ fileConfig(config.config_file_name)
 # target_metadata = None
 
 from src.db.base import Base  # noqa
-from src.db.session import settings
+from src.core.config import settings
 
 target_metadata = Base.metadata
 

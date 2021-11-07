@@ -4,7 +4,6 @@ from typing import Sequence
 
 
 class BeehiveBase(BaseModel):
-    label: str
     lon: float
     lat: float
     cluster_id: int

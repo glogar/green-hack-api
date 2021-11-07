@@ -2,12 +2,15 @@ from pydantic import BaseModel
 
 from typing import Sequence
 
+from datetime import datetime
+
 
 class DiseaseBase(BaseModel):
-    label: str
     lon: float
     lat: float
     radius: int
+    start_date: str
+    end_date: str
     is_active: bool
 
 
