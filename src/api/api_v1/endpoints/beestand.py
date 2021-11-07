@@ -13,6 +13,11 @@ router = APIRouter()
 
 
 @router.get("/", status_code=200, response_model=List[Beestand])
-def fetch_beestands(*, db: Session = Depends(deps.get_db)) -> list:
-    beestands = crud.beestand.get_multi(db=db)
+def fetch_beestands(
+    *,
+    skip: Optional[int] = 0,
+    limit: Optional[int] = 200,
+    db: Session = Depends(deps.get_db)
+) -> list:
+    beestands = crud.beestand.get_multi(db=db, skip=skip, limit=limit)
     return beestands

@@ -11,11 +11,23 @@ from src.api import deps
 from src.api.api_v1.api import api_router
 from src.core.config import settings
 
+from fastapi.middleware.cors import CORSMiddleware
+
 BASE_PATH = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
 
 root_router = APIRouter()
 app = FastAPI(title="Apisearch (Green Hack)")
+
+origins = ["*",]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):

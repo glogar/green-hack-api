@@ -13,6 +13,11 @@ router = APIRouter()
 
 
 @router.get("/", status_code=200, response_model=List[Breeding])
-def fetch_breedings(*, db: Session = Depends(deps.get_db)) -> list:
-    breedings = crud.breeding.get_multi(db=db)
+def fetch_breedings(
+    *,
+    skip: Optional[int] = 0,
+    limit: Optional[int] = 50,
+    db: Session = Depends(deps.get_db)
+) -> list:
+    breedings = crud.breeding.get_multi(db=db, skip=skip, limit=limit)
     return breedings

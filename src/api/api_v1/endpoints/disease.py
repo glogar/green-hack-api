@@ -13,6 +13,11 @@ router = APIRouter()
 
 
 @router.get("/", status_code=200, response_model=List[Disease])
-def fetch_diseases(*, db: Session = Depends(deps.get_db)) -> list:
-    diseases = crud.disease.get_multi(db=db)
+def fetch_diseases(
+    *,
+    skip: Optional[int] = 0,
+    limit: Optional[int] = 100,
+    db: Session = Depends(deps.get_db)
+) -> list:
+    diseases = crud.disease.get_multi(db=db, skip=skip, limit=limit)
     return diseases
